@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        NETLIFY_SITE_ID = '03d4042d-476c-4668-9ce8-34352dad73e4'
+        NETLIFY_SITE_ID = 'b55cd2e9-3cc9-4640-a6f0-64200e2be0cf'
         NETLIFY_AUTH_TOKEN = credentials('netlify-token')
     }
 
@@ -103,7 +103,7 @@ pipeline {
         }
 
         environment {
-            CI_ENVIRONMENT_URL = 'https://super-crisp-e79d2c.netlify.app'
+            CI_ENVIRONMENT_URL = 'https://super-crisp-e79d2c.netlify.app/'
         }
 
         steps {
@@ -120,3 +120,4 @@ pipeline {
     }
     }
 }
+
