@@ -103,7 +103,7 @@ pipeline {
         }
 
         environment {
-            CI_ENVIRONMENT_URL = 'https://super-crisp-e79d2c.netlify.app/'
+            CI_ENVIRONMENT_URL = 'https://super-crisp-e79d2c.netlify.app'
         }
 
         steps {
