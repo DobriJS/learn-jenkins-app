@@ -22,6 +22,8 @@ test('has expected app version', async ({ page }) => {
 
   console.log(expectedAppVersion);
 
-  const isVisible = await page.locator(`p:has-text("Application version: ${expectedAppVersion}")`).isVisible();
-  expect(isVisible).toBeTruthy();
+ /*  const isVisible = await page.locator(`p:has-text("Application version: ${expectedAppVersion}")`).isVisible();
+  expect(isVisible).toBeTruthy(); */
+  const versionLocator = page.locator(`p:has-text("Application version: ${expectedAppVersion}")`);
+  await expect(versionLocator).toBeVisible({ timeout: 7000 });
 });
