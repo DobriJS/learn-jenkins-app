@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+       /*  stage('Build') {
             agent {
                 docker {
                     image 'node:18-alpine'
@@ -34,7 +34,7 @@ pipeline {
                     npm run build
                 '''
             }
-        }
+        } */
 
         stage('Test') {
             agent {
@@ -66,11 +66,17 @@ pipeline {
                 docker {
                     image 'mcr.microsoft.com/playwright:v1.39.0-jammy'
                     reuseNode true
+                    args '-u root'
                 }
             }
-
+            environment {
+                HOME = "${WORKSPACE}"
+                NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
+                rm -rf /.npm _cacache
+    }
             steps {
                 sh '''
+                    rm -rf /.npm _cacache
                     npm install serve
                     node_modules/.bin/serve -s build &
                     sleep 10
