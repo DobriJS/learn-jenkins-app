@@ -72,7 +72,7 @@ pipeline {
             environment {
                 HOME = "${WORKSPACE}"
                 NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
-                rm -rf /.npm _cacache
+                rm -rf  .npm-cache _cacache
     }
             steps {
                 sh '''
