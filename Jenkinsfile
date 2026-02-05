@@ -1,9 +1,7 @@
 pipeline {
     agent any
-
-
     stages {
-    stage('Build') {
+        stage('Build') {
   agent {
     docker {
       image 'node:18-alpine'
@@ -13,21 +11,26 @@ pipeline {
 
   environment {
     NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
-    npm_config_loglevel = "warn"
-    npm_config_fund = "false"
-    npm_config_audit = "false"
   }
 
   steps {
     sh '''
-      echo "=== Clean install dirs ==="
-      rm -rf node_modules
+      echo "=== Sanity check ==="
+      whoami
+      id
 
-      echo "=== npm config ==="
+      echo "=== Using npm cache ==="
       npm config get cache
 
-      echo "=== Install deps (fast + safe) ==="
-      npm ci --prefer-offline
+      echo "=== Clean dirs ==="
+      rm -rf node_modules .npm-cache
+
+      echo "=== Versions ==="
+      node --version
+      npm --version
+
+      echo "=== Install ==="
+      npm ci --prefer-offline --no-audit --no-fund
 
       echo "=== Build ==="
       npm run build
@@ -36,4 +39,5 @@ pipeline {
 }
 
     }
+
 }
