@@ -75,11 +75,12 @@ pipeline {
                 }
             steps {
                 sh '''
-                    rm -rf .npm-cache _cacache
-                    npm install serve
-                    node_modules/.bin/serve -s build &
-                    sleep 10
-                    npx playwright test
+            
+            export npm_config_cache="$WORKSPACE/.npm-cache"            
+            npm install --quiet serve            
+            ./node_modules/.bin/serve -s build &
+            sleep 10
+            npx playwright test
                 '''
             }
         }
