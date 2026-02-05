@@ -10,10 +10,19 @@ pipeline {
             }
             steps {
                 sh '''
-                    ls -la
-                    npm ci
-                    npm run build
-                    ls -la
+                echo "=== Fix npm cache permissions ==="
+                chown -R $(id -u):$(id -g) /.npm || true
+
+                echo "=== Clean workspace ==="
+                rm -rf node_modules
+
+                echo "=== Versions ==="
+                node --version
+                npm --version
+
+                echo "=== Install & build ==="
+                npm ci
+                npm run build
                 '''
             }
         }
