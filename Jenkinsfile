@@ -75,7 +75,7 @@ pipeline {
                 }
             steps {
                 sh '''
-            
+            export REACT_APP_VERSION="1.0.0"
             export npm_config_cache="$WORKSPACE/.npm-cache"            
             npm install --quiet serve            
             ./node_modules/.bin/serve -s build &
