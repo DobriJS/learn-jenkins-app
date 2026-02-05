@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             agent {
                 docker {
-                    image 'node:18-alpine'
+                    image 'node:20-alpine'
                     reuseNode true
                     args "-u 111:113"
                 }
@@ -12,9 +12,7 @@ pipeline {
             steps {
                 sh '''
                     ls -la
-                    cleanWs()
-                    checkout scm
-                    echo "Running as user: $(id -u) and group: $(id -g)"
+                    npm cache clean -force 
                     npm ci
                     npm run build
                     ls -la
@@ -24,7 +22,7 @@ pipeline {
         stage('Test') {
             agent {
                 docker {
-                    image 'node:18-alpine'
+                    image 'node:20-alpine'
                     reuseNode true
                 }
             }
