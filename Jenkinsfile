@@ -72,11 +72,10 @@ pipeline {
             environment {
                 HOME = "${WORKSPACE}"
                 NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
-                rm -rf  .npm-cache _cacache
-    }
+                }
             steps {
                 sh '''
-                    rm -rf /.npm _cacache
+                    rm -rf .npm-cache _cacache
                     npm install serve
                     node_modules/.bin/serve -s build &
                     sleep 10
