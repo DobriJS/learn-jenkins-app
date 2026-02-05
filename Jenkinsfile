@@ -7,7 +7,7 @@ pipeline {
                     image 'node:18-alpine'
                     reuseNode true
                     // This ensures the container user matches the Jenkins host user
-                    args "-u \$(id -u):\$(id -g)"
+                    args "-u 111:113"
                 }
             }
             steps {
