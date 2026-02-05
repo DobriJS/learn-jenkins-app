@@ -35,8 +35,8 @@ pipeline {
                 '''
             }
         }
-        
-         stage('Test') {
+
+        stage('Test') {
             agent {
                 docker {
                     image 'node:18-alpine'
@@ -44,9 +44,18 @@ pipeline {
                 }
             }
 
+            environment {
+                HOME = "${WORKSPACE}"
+                NPM_CONFIG_CACHE = "${WORKSPACE}/.npm-cache"
+            }
+
             steps {
                 sh '''
+                    echo "=== Verify build output ==="
+                    ls -la build || true
                     test -f build/index.html
+
+                    echo "=== Run tests ==="
                     npm test
                 '''
             }
