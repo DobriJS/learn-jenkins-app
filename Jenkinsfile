@@ -4,15 +4,13 @@ pipeline {
         stage('Build') {
             agent {
                 docker {
-                    image 'node:20-alpine'
+                    image 'node:18-alpine'
                     reuseNode true
-                    args "-u 111:113"
                 }
             }
             steps {
                 sh '''
                     ls -la
-                    npm cache clean -force 
                     npm ci
                     npm run build
                     ls -la
@@ -22,7 +20,7 @@ pipeline {
         stage('Test') {
             agent {
                 docker {
-                    image 'node:20-alpine'
+                    image 'node:18-alpine'
                     reuseNode true
                 }
             }
